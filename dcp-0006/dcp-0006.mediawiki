@@ -226,7 +226,7 @@ The life-cycle of a TSpend transaction is as follows
 # If the TSpend is nominally valid (Expiry in the future, valid signature, valid public key etc) it is allowed in the mempool.
 # Once the TSpend hits the mempool wallets will be notified.
 # Voting wallets with a voting policy will now start voting either yes/no or abstain at the TSpend vote window start.
-# Votes are accumulated every block and once they reach an insurmountable tally they are short circuited.
+# Votes are accumulated every block. It is possible for a vote to be "short-circuited" if the outcome is already determined on a TVI block before the end of the voting interval. If an insurmountable tally of yes votes is reached, the TSpend is added to the TVI block. If an insurmountable tally of no votes is reached, the TSpend is removed from the mempool on the TVI block.
 # At the end of the TSpend window (which is always on a TVI because start is zero based) votes are tallied and if quorum and yes votes breach their respective thresholds the TSpend transaction is added to the block.
 # If the TSpend transaction does not make it into a block on the final TVI in the window the Expiry will force it from the mempool on the next block.
 
